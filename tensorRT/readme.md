@@ -130,3 +130,15 @@
     #创建一个creator，开始构造一个类creator 
     creator = trt.get_plugin_registry().get_plugin_creator('DeformablePoolPluginDynamic', '1', '')
     #初始化就是创建存放属性的列表
+
+    #创建一个mFC，用于保存数据
+    pfc = trt.PluginFieldCollection()
+    #创建属性                    （名字    ，数据   ，类型，  长度）
+    pf_out_size = trt.PluginField('out_size',np.array(out_size, dtype=np.int32),trt.PluginFieldType.INT32)
+    #列表保存
+    pfc.append(pf_out_size)
+
+    #使用属性列表来创建一个plugin，遍历列表pfc的属性值，取出后构造plugin
+    #layer_name 是OP的名字，pfc为属性构成的列表
+    creator.create_plugin(layer_name, pfc)
+    
