@@ -14,19 +14,19 @@ onnxruntime/include/onnxruntime/core/session下面
 
 
  有时候会出现无法加载库文件，手动加载即可
-***
-import torch
-torch.ops.load_library('/kaggle/working/onnxruntime-linux-x64-1.8.1/lib/libonnxruntime.so')
-torch.ops.load_library('/kaggle/working/onnxruntime-linux-x64-1.8.1/lib/libonnxruntime.so.1.8.1')
-***
+   ***
+   import torch
+   torch.ops.load_library('/kaggle/working/onnxruntime-linux-x64-1.8.1/lib/libonnxruntime.so')
+   torch.ops.load_library('/kaggle/working/onnxruntime-linux-x64-1.8.1/lib/libonnxruntime.so.1.8.1')
+   ***
  
 *使用就是*
 
-''
-ort_custom_op_path = get_onnxruntime_op_path()
-session_options = rt.SessionOptions()
-if os.path.exists(ort_custom_op_path):
-    session_options.register_custom_ops_library(ort_custom_op_path)
-''
+   ''
+   ort_custom_op_path = get_onnxruntime_op_path()
+   session_options = rt.SessionOptions()
+   if os.path.exists(ort_custom_op_path):
+       session_options.register_custom_ops_library(ort_custom_op_path)
+   ''
 *之后就可以在sess中使用*
  
